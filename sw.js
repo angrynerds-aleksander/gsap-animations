@@ -26,23 +26,23 @@ workbox.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-33ae923ebb792ebf1703.js"
+    "url": "webpack-runtime-e45e0686746c53fbf841.js"
   },
   {
     "url": "commons.5a942751d8a7f01a5d4b.css"
   },
   {
-    "url": "commons-946b2bdb0731ac91139d.js"
+    "url": "commons-197637942e86071181c3.js"
   },
   {
-    "url": "app-4bc3db655c5f08c40a62.js"
+    "url": "app-3469005a3db7f27e559b.js"
   },
   {
     "url": "component---node-modules-gatsby-plugin-offline-app-shell-js-19a7ebd12c5d2110dd75.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "2be7966f867ad9579ac1e129ed22e935"
+    "revision": "78af3da523e96542a204bedca0b65b84"
   },
   {
     "url": "google-fonts/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_cJD3gfD_g.woff2",
@@ -53,8 +53,12 @@ self.__precacheManifest = [
     "revision": "20f97c00e6ed7cf6dd254348adafbc03"
   },
   {
+    "url": "page-data/offline-plugin-app-shell-fallback/page-data.json",
+    "revision": "cecf49bb82a3203b52698b5dd937ee2e"
+  },
+  {
     "url": "manifest.webmanifest",
-    "revision": "26da2b5018419d322f72d293fc054d8f"
+    "revision": "91c7f44be9f22a90f8ea4f849047519d"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
@@ -73,12 +77,12 @@ const { NavigationRoute } = workbox.routing
 
 const navigationRoute = new NavigationRoute(async ({ event }) => {
   let { pathname } = new URL(event.request.url)
-  pathname = pathname.replace(new RegExp(`^`), ``)
+  pathname = pathname.replace(new RegExp(`^/gsap-animations`), ``)
 
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/app-4bc3db655c5f08c40a62.js`))) {
+  if (!resources || !(await caches.match(`/gsap-animations/app-3469005a3db7f27e559b.js`))) {
     return await fetch(event.request)
   }
 
@@ -91,7 +95,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
     }
   }
 
-  const offlineShell = `/offline-plugin-app-shell-fallback/index.html`
+  const offlineShell = `/gsap-animations/offline-plugin-app-shell-fallback/index.html`
   return await caches.match(offlineShell)
 })
 
